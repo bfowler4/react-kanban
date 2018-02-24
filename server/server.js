@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 8080;
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 
-
 server.use(`/api`, apiRoutes);
 
 server.listen(PORT, () => {

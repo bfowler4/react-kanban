@@ -1,6 +1,6 @@
 const express = require(`express`);
-const route = express.Router();
+const router = express.Router();
 const kanbanRoute = require(`./kanban`);
-module.exports = route;
+module.exports = router;
 
-route.use(`/kanban`, kanbanRoute);
+router.use(`/kanban`, kanbanRoute);
