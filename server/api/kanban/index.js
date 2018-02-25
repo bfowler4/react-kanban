@@ -20,6 +20,14 @@ router.route(`/`)
 });
 
 router.route(`/:id`)
+.get((req, res) => {
+  return new Card({ id: req.params.id })
+  .fetch()
+  .then(card => {
+    return res.json(card);
+  })
+  .catch(err => res.status(400).json({ message: err.message }));
+})
 .put((req, res) => {
   return new Card({ id: req.params.id })
   .save(req.body)
