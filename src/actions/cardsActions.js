@@ -7,6 +7,7 @@ export const ADD_CARD = `ADD_CARD`;
 export const DELETE_CARD = `DELETE_CARD`;
 export const SET_CARD_TO_EDIT = `SET_CARD_TO_EDIT`;
 export const EDIT_CARD = `EDIT_CARD`;
+export const DISPLAY_ADD_CARD_FLAG = `DISPLAY_ADD_CARD_FLAG`;
 
 export const loadCards = () => {
   return dispatch => {
@@ -88,5 +89,12 @@ export const moveCard = (id, status) => {
     .then(success => {
       dispatch(loadCards());
     });
+  }
+}
+
+export const displayAddCard = flag => {
+  return {
+    type: DISPLAY_ADD_CARD_FLAG,
+    flag: flag
   }
 }

@@ -1,0 +1,194 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+.kanban_board {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 960px;
+
+  .popup_background {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .add_card_popup {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      background-color: white;
+      width: 400px;
+      height: 300px;
+      margin-top: 100px;
+
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        align-self: flex-end;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgb(122, 125, 130);
+        }
+      }
+
+      form {
+        width: 400px;
+      }
+    }
+  }
+
+  .lists_container {
+    display: flex;
+    flex-flow: row;
+  
+    .card_list {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      width: 310px;
+      
+      h3 {
+        color: #4C515A;
+      }
+  
+      .card_list_item {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 268px;
+        margin: 5px 0;
+        padding: 10px;
+
+        p {
+          font-size: 75%;
+          color: #4C515A;
+        }
+
+        .card_item_title {
+          font-weight: 500;
+          font-size: 100%;
+        }
+
+        .card_item_bottom_row {
+          display: flex;
+          flex-flow: row nowrap;
+
+          .edit_delete_container {
+            display: flex;
+            flex-flow: row nowrap;
+
+            p {
+              padding-right: 10px;
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              &:last-child {
+                padding-right: 0;
+              }
+            }
+          }
+
+          .assigned_to_container {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+
+            p {
+              max-width: 100px;
+            }
+          }
+        }
+
+        .position_shift_buttons_container {
+          display: flex;
+          flex-flow: row nowrap;
+        }
+
+        p {
+          margin: 0;
+        }
+      }
+
+      .queue_card {
+        border: 1px solid #F7A51C;
+        background-color: #FDF2DE;
+
+        .card_item_bottom_row {
+          .edit_delete_container {
+            p {
+              color: #F7A51C;
+            }
+          }
+        }
+
+        .position_shift_buttons_container {
+          display: flex;
+          justify-content: flex-end;
+
+          .shift_left_button {
+            display: none;
+          }
+        }
+      }
+
+      .progress_card {
+        border: 1px solid #81CC2D;
+        background-color: #E5FECA;
+
+        .card_item_bottom_row {
+          .edit_delete_container {
+            p {
+              color: #81CC2D;
+            }
+          }
+        }
+
+        .position_shift_buttons_container {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+
+      .done_card {
+        border: 1px solid #BFC6D3;
+        background-color: #F7F8FB;
+
+        .card_item_bottom_row {
+          .edit_delete_container {
+            p {
+              color: #BFC6D3;
+            }
+          }
+        }
+
+        .position_shift_buttons_container {
+          display: flex;
+          justify-content: flex-start;
+
+          .shift_right_button {
+            display: none;
+          }
+        }
+      }
+    }
+  
+    .card_list:nth-child(2n) {
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+    }
+  }
+}

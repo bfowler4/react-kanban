@@ -3,11 +3,23 @@ import CardListItem from './CardListItem';
 
 export default ({ cards, status, deleteCard, moveCard, setCardToEdit }) => {
   cards = cards.filter(card => card.status === status);
+  let header;
+  switch (status) {
+    case `queue`:
+      header = `IN QUEUE`;
+      break;
+    case `progress`:
+      header = `IN PROGRESS`;
+      break;
+    default:
+      header = `DONE`;
+      break;
+  }
+
 
   return (
     <div className='card_list'>
-      <h3>{status}</h3>
-      <ul>
+      <h3>{header}</h3>
         {cards.length ? 
           cards.map(card => {
             return <CardListItem
@@ -23,8 +35,8 @@ export default ({ cards, status, deleteCard, moveCard, setCardToEdit }) => {
               setCardToEdit={setCardToEdit}
             />
           }) :
-          <li><h3>(No cards)</h3></li>}
-      </ul>
+          <h3>(No cards)</h3>
+        }
     </div>
   );
 }

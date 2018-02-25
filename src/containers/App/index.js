@@ -1,23 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './styles.css';
 
 import CardList from '../../components/CardList';
 import AddCardForm from '../../components/AddCardForm';
-import { loadCards, addCard, deleteCard, moveCard, setCardToEdit } from '../../actions/cardsActions';
+import { loadCards, addCard, deleteCard, moveCard, setCardToEdit, displayAddCard } from '../../actions/cardsActions';
 import EditCardForm from '../../components/EditCardForm';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleDisplayAddCard = this.handleDisplayAddCard.bind(this);
+    this.handleHideAddCard = this.handleHideAddCard.bind(this);
+  }
+
   componentWillMount() {
     this.props.loadCards();
   }
 
+  handleDisplayAddCard() {
+    this.props.displayAddCard(true);
+  }
+
+  handleHideAddCard(event) {
+    if (!event || event.target.className === 'hide_popup_button' || event.target.className === 'popup_background') {
+      this.props.displayAddCard(false);
+    }
+  }
+
   render() {
     return (
-      <div>
+      <div className='kanban_board'>
+        {this.props.displayAddCardFlag ? 
+          <AddCardForm 
+            addCard={this.props.addCard}
+            hideCardForm={this.handleHideAddCard}
+          /> :
+          null
+        }
         <h1>Kanban Board</h1>
-        <AddCardForm addCard={this.props.addCard}/>
-        <EditCardForm />
+        <button onClick={this.handleDisplayAddCard}>Add Card</button>
         <div className='lists_container'>
           <CardList 
             cards={this.props.cards} 
@@ -41,6 +65,7 @@ class App extends Component {
             setCardToEdit={this.props.setCardToEdit}
           />
         </div>
+        <EditCardForm />
       </div>
     );
   }
@@ -49,7 +74,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     cards: state.cards.cards,
-    cardToEdit: state.cards.cardToEdit
+    cardToEdit: state.cards.cardToEdit,
+    displayAddCardFlag: state.cards.displayAddCard
   }
 }
 
@@ -69,6 +95,9 @@ const mapDispatchToProps = dispatch => {
     },
     setCardToEdit: id => {
       dispatch(setCardToEdit(id));
+    },
+    displayAddCard: flag => {
+      dispatch(displayAddCard(flag));
     }
   }
 }

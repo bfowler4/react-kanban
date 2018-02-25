@@ -1,6 +1,24 @@
 import React from 'react';
 
 export default ({ id, title, priority, status, created_by, assigned_to, deleteCard, moveCard, setCardToEdit }) => {
+  let left;
+  let right;
+
+  switch (status) {
+    case `queue`:
+      left = null;
+      right = `progress`;
+      break;
+    case `progress`:
+      left = `queue`;
+      right = `done`;
+      break;
+    default:
+      left = `progress`;
+      right = null;
+      break;
+  }
+  
   function handleDelete(event) {
     deleteCard(id);
   }
@@ -14,17 +32,24 @@ export default ({ id, title, priority, status, created_by, assigned_to, deleteCa
   }
 
   return (
-    <li className='class_list_item'>
-      <h3>{title}</h3>
+    <div className={`card_list_item ${status}_card`}>
+      <p className='card_item_title'>{title}</p>
       <p>Priority: {priority}</p>
       <p>Assigned by: {created_by}</p>
-      <p>Assigned to: {assigned_to}</p>
-      <button onClick={handleEdit}>Edit</button>
-      <button onClick={handleDelete}>Delete</button>
+      <div className='card_item_bottom_row'>
+        <div className='edit_delete_container'>
+          <p onClick={handleEdit}>Edit</p>
+          <p onClick={handleDelete}>Delete</p>
+        </div>
+        <div className='assigned_to_container'>
+          <p>{assigned_to}</p>
+        </div>
+      </div>
       <br/>
-      <button data-status='queue' onClick={handleMove}>To queue</button>
-      <button data-status='progress'onClick={handleMove}>To progress</button>
-      <button data-status='done' onClick={handleMove}>To done</button>
-    </li>
+      <div className='position_shift_buttons_container'>
+        <button className='shift_left_button' data-status={left} onClick={handleMove}>Left</button>
+        <button className='shift_right_button' data-status={right} onClick={handleMove}>Right</button>
+      </div>
+    </div>
   );
 }
