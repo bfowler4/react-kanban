@@ -48,7 +48,7 @@ class EditCardForm extends Component {
             onChange={this.handleChange}
             name='title'
             value={this.state.card.title || ``}
-            placeholder='Title'
+            placeholder='What needs to be done'
           />
           <p>Assigned by:</p>
           <input
@@ -56,7 +56,7 @@ class EditCardForm extends Component {
             onChange={this.handleChange}
             name='created_by'
             value={this.state.card.created_by || ``}
-            placeholder='Created by'
+            placeholder='Who is creating this'
             className='capitalize'
           />
           <p>Assigned to:</p>
@@ -65,7 +65,7 @@ class EditCardForm extends Component {
             onChange={this.handleChange}
             name='assigned_to'
             value={this.state.card.assigned_to || ``}
-            placeholder='Assigned to'
+            placeholder='Who is handling this'
             className='capitalize'
           />
           <p>Priority:</p>

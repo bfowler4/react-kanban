@@ -16,9 +16,17 @@ export default ({ cards, status, deleteCard, moveCard, setCardToEdit }) => {
       break;
   }
 
+  function allowDrag(event) {
+    event.preventDefault();
+  }
+
+  function drop(event) {
+    let droppedCardId = event.dataTransfer.getData(`id`);
+    moveCard(droppedCardId, status);
+  }
 
   return (
-    <div className='card_list'>
+    <div className='card_list' onDragOver={allowDrag} onDrop={drop}>
       <h4>{header}</h4>
         {cards.length ? 
           cards.map(card => {
@@ -31,7 +39,6 @@ export default ({ cards, status, deleteCard, moveCard, setCardToEdit }) => {
               created_by={card.created_by}
               assigned_to={card.assigned_to}
               deleteCard={deleteCard}
-              moveCard={moveCard}
               setCardToEdit={setCardToEdit}
             />
           }) :

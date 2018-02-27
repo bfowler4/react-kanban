@@ -24,7 +24,7 @@ export default ({ addCard, hideCardForm }) => {
         <span onClick={hideCardForm} className='hide_popup_button'>X</span>
         <h2>CREATE CARD</h2>
         <p>Title:</p>
-        <input type='text' onChange={handleChange} name='title' placeholder='What needs to get done' />
+        <input type='text' onChange={handleChange} name='title' placeholder='What needs to be done' />
         <p>Assigned by:</p>
         <input type='text' onChange={handleChange} name='created_by' placeholder='Who is creating this' />
         <p>Assigned to:</p>

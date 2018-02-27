@@ -123,10 +123,6 @@ html, body {
         }
       }
 
-      .capitalize_first_letter {
-        text-transform: capitalize;
-      }
-
       .capitalize {
         text-transform: capitalize;
       }
@@ -214,15 +210,6 @@ html, body {
           }
         }
 
-        .position_shift_buttons_container {
-          display: flex;
-          flex-flow: row nowrap;
-
-          button {
-            cursor: pointer;
-          }
-        }
-
         p {
           margin: 0;
         }
@@ -241,15 +228,6 @@ html, body {
                 color: rgb(235, 131, 4);
               }
             }
-          }
-        }
-
-        .position_shift_buttons_container {
-          display: flex;
-          justify-content: flex-end;
-
-          .shift_left_button {
-            display: none;
           }
         }
       }
@@ -289,15 +267,6 @@ html, body {
                 color: rgb(146, 157, 175);
               }
             }
-          }
-        }
-
-        .position_shift_buttons_container {
-          display: flex;
-          justify-content: flex-start;
-
-          .shift_right_button {
-            display: none;
           }
         }
       }

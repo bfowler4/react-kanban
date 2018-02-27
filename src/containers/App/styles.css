@@ -92,8 +92,6 @@ html, body {
           cursor: pointer;
           background: #78788c;
           color: white; }
-      .kanban_board .popup_background #add_card_form .capitalize_first_letter, .kanban_board .popup_background #edit_card_form .capitalize_first_letter {
-        text-transform: capitalize; }
       .kanban_board .popup_background #add_card_form .capitalize, .kanban_board .popup_background #edit_card_form .capitalize {
         text-transform: capitalize; }
   .kanban_board .lists_container {
@@ -146,11 +144,6 @@ html, body {
             .kanban_board .lists_container .card_list .card_list_item .card_item_bottom_row .assigned_to_container p {
               max-width: 100px;
               text-transform: capitalize; }
-        .kanban_board .lists_container .card_list .card_list_item .position_shift_buttons_container {
-          display: flex;
-          flex-flow: row nowrap; }
-          .kanban_board .lists_container .card_list .card_list_item .position_shift_buttons_container button {
-            cursor: pointer; }
         .kanban_board .lists_container .card_list .card_list_item p {
           margin: 0; }
       .kanban_board .lists_container .card_list .queue_card {
@@ -160,11 +153,6 @@ html, body {
           color: #F7A51C; }
           .kanban_board .lists_container .card_list .queue_card .card_item_bottom_row .edit_delete_container p:hover {
             color: #eb8304; }
-        .kanban_board .lists_container .card_list .queue_card .position_shift_buttons_container {
-          display: flex;
-          justify-content: flex-end; }
-          .kanban_board .lists_container .card_list .queue_card .position_shift_buttons_container .shift_left_button {
-            display: none; }
       .kanban_board .lists_container .card_list .progress_card {
         border: 1px solid #81CC2D;
         background-color: #E5FECA; }
@@ -182,11 +170,6 @@ html, body {
           color: #BFC6D3; }
           .kanban_board .lists_container .card_list .done_card .card_item_bottom_row .edit_delete_container p:hover {
             color: #929daf; }
-        .kanban_board .lists_container .card_list .done_card .position_shift_buttons_container {
-          display: flex;
-          justify-content: flex-start; }
-          .kanban_board .lists_container .card_list .done_card .position_shift_buttons_container .shift_right_button {
-            display: none; }
     .kanban_board .lists_container .card_list:nth-child(2n) {
       border-left: 1px solid black;
       border-right: 1px solid black; }

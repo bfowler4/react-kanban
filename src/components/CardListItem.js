@@ -1,24 +1,6 @@
 import React from 'react';
 
-export default ({ id, title, priority, status, created_by, assigned_to, deleteCard, moveCard, setCardToEdit }) => {
-  let left;
-  let right;
-
-  switch (status) {
-    case `queue`:
-      left = null;
-      right = `progress`;
-      break;
-    case `progress`:
-      left = `queue`;
-      right = `done`;
-      break;
-    default:
-      left = `progress`;
-      right = null;
-      break;
-  }
-  
+export default ({ id, title, priority, status, created_by, assigned_to, deleteCard, setCardToEdit }) => {
   function handleDelete(event) {
     deleteCard(id);
   }
@@ -27,12 +9,12 @@ export default ({ id, title, priority, status, created_by, assigned_to, deleteCa
     setCardToEdit(id);
   }
 
-  function handleMove(event) {
-    moveCard(id, event.target.dataset.status);
+  function dragStart(event) {
+    event.dataTransfer.setData(`id`, id);
   }
 
   return (
-    <div className={`card_list_item ${status}_card`}>
+    <div className={`card_list_item ${status}_card`} draggable='true' onDragStart={dragStart}>
       <p className='card_item_title'>{title}</p>
       <div className='priority_container'>
         <p>Priority:</p>
@@ -50,11 +32,6 @@ export default ({ id, title, priority, status, created_by, assigned_to, deleteCa
         <div className='assigned_to_container'>
           <p>{assigned_to}</p>
         </div>
-      </div>
-      <br/>
-      <div className='position_shift_buttons_container'>
-        <button className='shift_left_button' data-status={left} onClick={handleMove}>Left</button>
-        <button className='shift_right_button' data-status={right} onClick={handleMove}>Right</button>
       </div>
     </div>
   );
