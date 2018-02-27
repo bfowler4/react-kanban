@@ -34,8 +34,14 @@ export default ({ id, title, priority, status, created_by, assigned_to, deleteCa
   return (
     <div className={`card_list_item ${status}_card`}>
       <p className='card_item_title'>{title}</p>
-      <p>Priority: {priority}</p>
-      <p>Assigned by: {created_by}</p>
+      <div className='priority_container'>
+        <p>Priority:</p>
+        <p className='capitalize'>{priority}</p>
+      </div>
+      <div className='assigned_by_container'>
+        <p>Assigned by:</p>
+        <p className='capitalize'>{created_by}</p>
+      </div>
       <div className='card_item_bottom_row'>
         <div className='edit_delete_container'>
           <p onClick={handleEdit}>Edit</p>

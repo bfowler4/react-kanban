@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './styles.css';
 
+import Header from '../../components/Header';
 import CardList from '../../components/CardList';
 import AddCardForm from '../../components/AddCardForm';
-import { loadCards, addCard, deleteCard, moveCard, setCardToEdit, displayAddCard } from '../../actions/cardsActions';
 import EditCardForm from '../../components/EditCardForm';
+import { loadCards, addCard, deleteCard, moveCard, setCardToEdit, displayAddCard } from '../../actions/cardsActions';
 
 
 class App extends Component {
@@ -33,15 +34,7 @@ class App extends Component {
   render() {
     return (
       <div className='kanban_board'>
-        {this.props.displayAddCardFlag ? 
-          <AddCardForm 
-            addCard={this.props.addCard}
-            hideCardForm={this.handleHideAddCard}
-          /> :
-          null
-        }
-        <h1>Kanban Board</h1>
-        <button onClick={this.handleDisplayAddCard}>Add Card</button>
+        <Header handleDisplayAddCard={this.handleDisplayAddCard}/>
         <div className='lists_container'>
           <CardList 
             cards={this.props.cards} 
@@ -65,7 +58,16 @@ class App extends Component {
             setCardToEdit={this.props.setCardToEdit}
           />
         </div>
-        <EditCardForm />
+        {this.props.displayEditCardFlag ?
+          <EditCardForm /> : null
+        }
+        {this.props.displayAddCardFlag ? 
+          <AddCardForm 
+            addCard={this.props.addCard}
+            hideCardForm={this.handleHideAddCard}
+          /> :
+          null
+        }
       </div>
     );
   }
@@ -75,7 +77,8 @@ const mapStateToProps = state => {
   return {
     cards: state.cards.cards,
     cardToEdit: state.cards.cardToEdit,
-    displayAddCardFlag: state.cards.displayAddCard
+    displayAddCardFlag: state.cards.displayAddCard,
+    displayEditCardFlag: state.cards.displayEditCard
   }
 }
 

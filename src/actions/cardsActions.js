@@ -5,9 +5,10 @@ const HOST = `http://localhost:8080/api`;
 export const LOAD_CARDS = `LOAD_CARDS`;
 export const ADD_CARD = `ADD_CARD`;
 export const DELETE_CARD = `DELETE_CARD`;
-export const SET_CARD_TO_EDIT = `SET_CARD_TO_EDIT`;
 export const EDIT_CARD = `EDIT_CARD`;
+export const SET_CARD_TO_EDIT = `SET_CARD_TO_EDIT`;
 export const DISPLAY_ADD_CARD_FLAG = `DISPLAY_ADD_CARD_FLAG`;
+export const DISPLAY_EDIT_CARD_FLAG = `DISPLAY_EDIT_CARD_FLAG`;
 
 export const loadCards = () => {
   return dispatch => {
@@ -54,10 +55,13 @@ export const setCardToEdit = id => {
     return fetch(`${HOST}/kanban/${id}`)
     .then(response => response.json())
     .then(card => {
-      dispatch({
+      return dispatch({
         type: SET_CARD_TO_EDIT,
         card: card
       });
+    })
+    .then(displayCard => {
+      dispatch(displayEditCard(true));
     });
   }
 }
@@ -95,6 +99,13 @@ export const moveCard = (id, status) => {
 export const displayAddCard = flag => {
   return {
     type: DISPLAY_ADD_CARD_FLAG,
+    flag: flag
+  }
+}
+
+export const displayEditCard = flag => {
+  return {
+    type: DISPLAY_EDIT_CARD_FLAG,
     flag: flag
   }
 }

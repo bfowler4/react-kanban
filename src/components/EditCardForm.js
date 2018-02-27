@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { editCard } from '../actions/cardsActions';
+import { editCard, displayEditCard } from '../actions/cardsActions';
 
 class EditCardForm extends Component {
   constructor(props) {
@@ -13,10 +13,11 @@ class EditCardForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleHideEditCard = this.handleHideEditCard.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ card: { ...nextProps.cardToEdit } });
+  componentWillMount() {
+    this.setState({ card: { ...this.props.cardToEdit } });
   }
 
   handleChange(event) {
@@ -25,51 +26,64 @@ class EditCardForm extends Component {
 
   handleSubmit(event) {
     this.props.editCard(this.state.card);
-    this.setState({ card: {} });
+    this.handleHideEditCard();
     event.preventDefault();
+  }
+
+  handleHideEditCard(event) {
+    if (!event || event.target.className === 'hide_popup_button' || event.target.className === 'popup_background') {
+      this.props.displayEditCard(false);
+    }
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type='text'
-          onChange={this.handleChange}
-          name='title'
-          value={this.state.card.title || ``}
-          placeholder='Title'
-        />
-        <br />
-        <input
-          type='text'
-          onChange={this.handleChange}
-          name='created_by'
-          value={this.state.card.created_by || ``}
-          placeholder='Created by'
-        />
-        <br />
-        <input
-          type='text'
-          onChange={this.handleChange}
-          name='assigned_to'
-          value={this.state.card.assigned_to || ``}
-          placeholder='Assigned to'
-        />
-        <br />
-        <select
-          onChange={this.handleChange}
-          value={this.state.card.priority || `low`}
-          name='priority'
-          size='1'
-        >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-          <option value="blocker">Blocker</option>
-        </select>
-        <br />
-        <input type='submit' value='Edit Card' />
-      </form>
+      <div className='popup_background' onClick={this.handleHideEditCard}>
+        <form id='edit_card_form' onSubmit={this.handleSubmit}>
+          <span className='hide_popup_button' onClick={this.handleHideEditCard}>X</span>
+          <h2>EDIT CARD</h2>
+          <p>Title:</p>
+          <input
+            type='text'
+            onChange={this.handleChange}
+            name='title'
+            value={this.state.card.title || ``}
+            placeholder='Title'
+          />
+          <p>Assigned by:</p>
+          <input
+            type='text'
+            onChange={this.handleChange}
+            name='created_by'
+            value={this.state.card.created_by || ``}
+            placeholder='Created by'
+            className='capitalize'
+          />
+          <p>Assigned to:</p>
+          <input
+            type='text'
+            onChange={this.handleChange}
+            name='assigned_to'
+            value={this.state.card.assigned_to || ``}
+            placeholder='Assigned to'
+            className='capitalize'
+          />
+          <p>Priority:</p>
+          <select
+            onChange={this.handleChange}
+            value={this.state.card.priority || `low`}
+            name='priority'
+            size='1'
+          >
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="blocker">Blocker</option>
+          </select>
+          <br />
+          <input type='submit' value='Edit Card' />
+        </form>
+      </div>
     );
   }
 }
@@ -84,6 +98,9 @@ const mapDispatchToProps = dispatch => {
   return {
     editCard: card => {
       dispatch(editCard(card));
+    },
+    displayEditCard: flag => {
+      dispatch(displayEditCard(flag));
     }
   }
 }

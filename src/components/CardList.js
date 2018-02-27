@@ -19,7 +19,7 @@ export default ({ cards, status, deleteCard, moveCard, setCardToEdit }) => {
 
   return (
     <div className='card_list'>
-      <h3>{header}</h3>
+      <h4>{header}</h4>
         {cards.length ? 
           cards.map(card => {
             return <CardListItem
