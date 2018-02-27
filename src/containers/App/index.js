@@ -4,7 +4,7 @@ import './styles.css';
 
 import Header from '../../components/Header';
 import CardList from '../../components/CardList';
-import AddEditCardForm from '../../components/AddEditCardForm';
+import AddEditCardForm from '../AddEditCardForm';
 import { loadCards, deleteCard, moveCard, setCardToEdit, displayAddEditCard } from '../../actions/cardsActions';
 
 

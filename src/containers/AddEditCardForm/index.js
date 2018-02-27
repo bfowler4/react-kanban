@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { addCard, editCard, displayAddEditCard } from '../actions/cardsActions';
+import { addCard, editCard, displayAddEditCard } from '../../actions/cardsActions';
 
 
 class AddEditCardForm extends Component {
