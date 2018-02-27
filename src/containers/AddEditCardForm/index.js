@@ -46,14 +46,14 @@ class AddEditCardForm extends Component {
   }
 
   handleHideAddEditCard(event) {
-    if (!event || event.target.className === 'hide_popup_button' || event.target.className === 'popup_background') {
+    if (!event || event.keyCode == `27` || event.target.className === 'hide_popup_button' || event.target.className === 'popup_background') {
       this.props.displayAddEditCard(false);
     }
   }
 
   render() {
     return (
-      <div className='popup_background' onClick={this.handleHideAddEditCard}>
+      <div className='popup_background' onClick={this.handleHideAddEditCard} onKeyDown={this.handleHideAddEditCard}>
         <form id='add_edit_card_form' onSubmit={this.handleSubmit}>
           <span className='hide_popup_button' onClick={this.handleHideAddEditCard}>X</span>
           <h2>{this.props.addOrEdit === `add` ? 
