@@ -4,37 +4,29 @@ import './styles.css';
 
 import Header from '../../components/Header';
 import CardList from '../../components/CardList';
-import AddCardForm from '../../components/AddCardForm';
-import EditCardForm from '../../components/EditCardForm';
-import { loadCards, addCard, deleteCard, moveCard, setCardToEdit, displayAddCard } from '../../actions/cardsActions';
+import AddEditCardForm from '../../components/AddEditCardForm';
+import { loadCards, deleteCard, moveCard, setCardToEdit, displayAddEditCard } from '../../actions/cardsActions';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.handleDisplayAddCard = this.handleDisplayAddCard.bind(this);
-    this.handleHideAddCard = this.handleHideAddCard.bind(this);
+    this.handleDisplayAddEditCard = this.handleDisplayAddEditCard.bind(this);
   }
 
   componentWillMount() {
     this.props.loadCards();
   }
 
-  handleDisplayAddCard() {
-    this.props.displayAddCard(true);
-  }
-
-  handleHideAddCard(event) {
-    if (!event || event.target.className === 'hide_popup_button' || event.target.className === 'popup_background') {
-      this.props.displayAddCard(false);
-    }
+  handleDisplayAddEditCard() {
+    this.props.displayAddEditCard(`add`);
   }
 
   render() {
     return (
       <div className='kanban_board'>
-        <Header handleDisplayAddCard={this.handleDisplayAddCard}/>
+        <Header handleDisplayAddEditCard={this.handleDisplayAddEditCard}/>
         <div className='lists_container'>
           <CardList 
             cards={this.props.cards} 
@@ -58,15 +50,8 @@ class App extends Component {
             setCardToEdit={this.props.setCardToEdit}
           />
         </div>
-        {this.props.displayEditCardFlag ?
-          <EditCardForm /> : null
-        }
-        {this.props.displayAddCardFlag ? 
-          <AddCardForm 
-            addCard={this.props.addCard}
-            hideCardForm={this.handleHideAddCard}
-          /> :
-          null
+        {this.props.displayAddEditCardFlag ?
+          <AddEditCardForm /> : null
         }
       </div>
     );
@@ -76,9 +61,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     cards: state.cards.cards,
-    cardToEdit: state.cards.cardToEdit,
-    displayAddCardFlag: state.cards.displayAddCard,
-    displayEditCardFlag: state.cards.displayEditCard
+    displayAddEditCardFlag: state.cards.displayAddEditCard
   }
 }
 
@@ -86,9 +69,6 @@ const mapDispatchToProps = dispatch => {
   return {
     loadCards: () => {
       dispatch(loadCards());
-    },
-    addCard: card => {
-      dispatch(addCard(card));
     },
     deleteCard: id => {
       dispatch(deleteCard(id));
@@ -99,8 +79,8 @@ const mapDispatchToProps = dispatch => {
     setCardToEdit: id => {
       dispatch(setCardToEdit(id));
     },
-    displayAddCard: flag => {
-      dispatch(displayAddCard(flag));
+    displayAddEditCard: flag => {
+      dispatch(displayAddEditCard(flag));
     }
   }
 }

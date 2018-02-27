@@ -1,10 +1,9 @@
-import { LOAD_CARDS, SET_CARD_TO_EDIT, DISPLAY_ADD_CARD_FLAG, DISPLAY_EDIT_CARD_FLAG } from '../actions/cardsActions';
+import { LOAD_CARDS, SET_CARD_TO_EDIT, DISPLAY_ADD_EDIT_CARD_FLAG } from '../actions/cardsActions';
 
 const initialState = {
   cards: [],
   cardToEdit: {},
-  displayAddCard: false,
-  displayEditCard: false
+  displayAddEditCard: false
 }
 
 export default (state = initialState, action = {}) => {
@@ -13,10 +12,8 @@ export default (state = initialState, action = {}) => {
       return { ...state, cards: action.cards };
     case SET_CARD_TO_EDIT:
       return { ...state, cardToEdit: action.card };
-    case DISPLAY_ADD_CARD_FLAG:
-      return { ...state, displayAddCard: action.flag };
-    case DISPLAY_EDIT_CARD_FLAG:
-      return { ...state, displayEditCard: action.flag };
+    case DISPLAY_ADD_EDIT_CARD_FLAG:
+      return { ...state, displayAddEditCard: action.flag };
     default:
       return state;
   }

@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { editCard, displayEditCard } from '../actions/cardsActions';
+import { addCard, editCard, displayAddEditCard } from '../actions/cardsActions';
 
-class EditCardForm extends Component {
+
+class AddEditCardForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      card: {}
+      card: {
+        title: ``,
+        priority: `low`,
+        created_by: ``,
+        assigned_to: ``
+      }
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleHideEditCard = this.handleHideEditCard.bind(this);
+    this.handleHideAddEditCard = this.handleHideAddEditCard.bind(this);
   }
 
   componentWillMount() {
-    this.setState({ card: { ...this.props.cardToEdit } });
+    if (this.props.addOrEdit === `edit`) {
+      this.setState({ card: { ...this.props.cardToEdit } });
+    }
   }
 
   handleChange(event) {
@@ -25,29 +33,38 @@ class EditCardForm extends Component {
   }
 
   handleSubmit(event) {
-    this.props.editCard(this.state.card);
-    this.handleHideEditCard();
     event.preventDefault();
+
+    if (this.props.addOrEdit === `add`) {
+      let { title, priority, created_by, assigned_to } = this.state.card;
+      this.props.addCard({ title, priority, created_by, assigned_to });
+    } else {
+      this.props.editCard(this.state.card);
+    }
+
+    this.handleHideAddEditCard();
   }
 
-  handleHideEditCard(event) {
+  handleHideAddEditCard(event) {
     if (!event || event.target.className === 'hide_popup_button' || event.target.className === 'popup_background') {
-      this.props.displayEditCard(false);
+      this.props.displayAddEditCard(false);
     }
   }
 
   render() {
     return (
-      <div className='popup_background' onClick={this.handleHideEditCard}>
-        <form id='edit_card_form' onSubmit={this.handleSubmit}>
-          <span className='hide_popup_button' onClick={this.handleHideEditCard}>X</span>
-          <h2>EDIT CARD</h2>
+      <div className='popup_background' onClick={this.handleHideAddEditCard}>
+        <form id='add_edit_card_form' onSubmit={this.handleSubmit}>
+          <span className='hide_popup_button' onClick={this.handleHideAddEditCard}>X</span>
+          <h2>{this.props.addOrEdit === `add` ? 
+            `CREATE CARD` : `EDIT CARD`}
+          </h2>
           <p>Title:</p>
           <input
             type='text'
             onChange={this.handleChange}
             name='title'
-            value={this.state.card.title || ``}
+            value={this.state.card.title}
             placeholder='What needs to be done'
           />
           <p>Assigned by:</p>
@@ -55,7 +72,7 @@ class EditCardForm extends Component {
             type='text'
             onChange={this.handleChange}
             name='created_by'
-            value={this.state.card.created_by || ``}
+            value={this.state.card.created_by}
             placeholder='Who is creating this'
             className='capitalize'
           />
@@ -64,14 +81,14 @@ class EditCardForm extends Component {
             type='text'
             onChange={this.handleChange}
             name='assigned_to'
-            value={this.state.card.assigned_to || ``}
+            value={this.state.card.assigned_to}
             placeholder='Who is handling this'
             className='capitalize'
           />
           <p>Priority:</p>
           <select
             onChange={this.handleChange}
-            value={this.state.card.priority || `low`}
+            value={this.state.card.priority}
             name='priority'
             size='1'
           >
@@ -81,7 +98,10 @@ class EditCardForm extends Component {
             <option value="blocker">Blocker</option>
           </select>
           <br />
-          <input type='submit' value='Edit Card' />
+          <input type='submit' 
+            value={this.props.addOrEdit === `add` ?
+              `Submit Card` : `Update Card`}
+          />
         </form>
       </div>
     );
@@ -91,23 +111,27 @@ class EditCardForm extends Component {
 const mapStateToProps = state => {
   return {
     cardToEdit: state.cards.cardToEdit,
+    addOrEdit: state.cards.displayAddEditCard
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    addCard: card => {
+      dispatch(addCard(card));
+    },
     editCard: card => {
       dispatch(editCard(card));
     },
-    displayEditCard: flag => {
-      dispatch(displayEditCard(flag));
+    displayAddEditCard: flag => {
+      dispatch(displayAddEditCard(flag));
     }
   }
 }
 
-const ConnectedEditCardForm = connect(
+const ConnectedAddEditCardForm = connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditCardForm);
+)(AddEditCardForm);
 
-export default ConnectedEditCardForm;
+export default ConnectedAddEditCardForm;

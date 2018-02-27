@@ -53,7 +53,7 @@ html, body {
         cursor: pointer;
         background: #78788c;
         color: white; }
-    .kanban_board .popup_background #add_card_form, .kanban_board .popup_background #edit_card_form {
+    .kanban_board .popup_background #add_edit_card_form {
       display: flex;
       flex-flow: column nowrap;
       width: 300px;
@@ -63,36 +63,36 @@ html, body {
       box-shadow: 0 0 40px -10px #000;
       padding: 0 25px;
       color: #78788c; }
-      .kanban_board .popup_background #add_card_form h2, .kanban_board .popup_background #edit_card_form h2 {
+      .kanban_board .popup_background #add_edit_card_form h2 {
         width: 170px;
         padding-bottom: 5px;
         border-bottom: 3px solid #78788c; }
-      .kanban_board .popup_background #add_card_form p, .kanban_board .popup_background #edit_card_form p {
+      .kanban_board .popup_background #add_edit_card_form p {
         margin: 0; }
-      .kanban_board .popup_background #add_card_form input[type='text'], .kanban_board .popup_background #edit_card_form input[type='text'] {
+      .kanban_board .popup_background #add_edit_card_form input[type='text'] {
         border: 0;
         outline: 0;
         box-sizing: border-box;
         border-bottom: solid #bebed2 2px;
         padding: 10px;
         margin-bottom: 10px; }
-        .kanban_board .popup_background #add_card_form input[type='text']:focus, .kanban_board .popup_background #edit_card_form input[type='text']:focus {
+        .kanban_board .popup_background #add_edit_card_form input[type='text']:focus {
           border-bottom: solid #78788c 2px; }
-      .kanban_board .popup_background #add_card_form select, .kanban_board .popup_background #edit_card_form select {
+      .kanban_board .popup_background #add_edit_card_form select {
         margin-left: 10px;
         margin-top: 5px;
         width: 100px; }
-      .kanban_board .popup_background #add_card_form input[type='submit'], .kanban_board .popup_background #edit_card_form input[type='submit'] {
+      .kanban_board .popup_background #add_edit_card_form input[type='submit'] {
         align-self: flex-end;
         width: 85px;
         border: 2px solid #78788c;
         padding: 6px 0;
         transition: all 0.2s; }
-        .kanban_board .popup_background #add_card_form input[type='submit']:hover, .kanban_board .popup_background #edit_card_form input[type='submit']:hover {
+        .kanban_board .popup_background #add_edit_card_form input[type='submit']:hover {
           cursor: pointer;
           background: #78788c;
           color: white; }
-      .kanban_board .popup_background #add_card_form .capitalize, .kanban_board .popup_background #edit_card_form .capitalize {
+      .kanban_board .popup_background #add_edit_card_form .capitalize {
         text-transform: capitalize; }
   .kanban_board .lists_container {
     display: flex;

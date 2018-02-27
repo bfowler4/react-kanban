@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default ({ handleDisplayAddCard }) => {
+export default ({ handleDisplayAddEditCard }) => {
   return (
     <div className='header_container'>
       <p>KANBAN</p>
-      <span onClick={handleDisplayAddCard}>+ NEW TASK</span>
+      <span onClick={handleDisplayAddEditCard}>+ NEW TASK</span>
     </div>
   )
 }

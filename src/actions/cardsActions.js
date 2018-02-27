@@ -7,8 +7,8 @@ export const ADD_CARD = `ADD_CARD`;
 export const DELETE_CARD = `DELETE_CARD`;
 export const EDIT_CARD = `EDIT_CARD`;
 export const SET_CARD_TO_EDIT = `SET_CARD_TO_EDIT`;
-export const DISPLAY_ADD_CARD_FLAG = `DISPLAY_ADD_CARD_FLAG`;
-export const DISPLAY_EDIT_CARD_FLAG = `DISPLAY_EDIT_CARD_FLAG`;
+export const DISPLAY_ADD_EDIT_CARD_FLAG = `DISPLAY_ADD_EDIT_CARD_FLAG`;
+export const MOVE_CARD = `MOVE_CARD`;
 
 export const loadCards = () => {
   return dispatch => {
@@ -61,7 +61,7 @@ export const setCardToEdit = id => {
       });
     })
     .then(displayCard => {
-      dispatch(displayEditCard(true));
+      dispatch(displayAddEditCard(`edit`));
     });
   }
 }
@@ -96,16 +96,9 @@ export const moveCard = (id, status) => {
   }
 }
 
-export const displayAddCard = flag => {
+export const displayAddEditCard = flag => {
   return {
-    type: DISPLAY_ADD_CARD_FLAG,
-    flag: flag
-  }
-}
-
-export const displayEditCard = flag => {
-  return {
-    type: DISPLAY_EDIT_CARD_FLAG,
+    type: DISPLAY_ADD_EDIT_CARD_FLAG,
     flag: flag
   }
 }
