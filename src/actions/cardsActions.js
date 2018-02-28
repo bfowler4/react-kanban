@@ -15,9 +15,12 @@ export const loadCards = () => {
     return fetch(`${HOST}/kanban`)
     .then(response => response.json())
     .then(cards => {
+      return cards.sort(compareCard);
+    })
+    .then(sortedCards => {
       dispatch({
         type: LOAD_CARDS,
-        cards: cards
+        cards: sortedCards
       });
     })
     .catch(err => console.log(err));
@@ -101,4 +104,19 @@ export const displayAddEditCard = flag => {
     type: DISPLAY_ADD_EDIT_CARD_FLAG,
     flag: flag
   }
+}
+
+function compareCard(a, b) {
+  let priorityIndex = [`low`, `medium`, `high`, `blocker`];
+
+  let aIndex = priorityIndex.indexOf(a.priority);
+  let bIndex = priorityIndex.indexOf(b.priority);
+
+  if (aIndex < bIndex) {
+    return 1;
+  }
+  if (aIndex > bIndex) {
+    return -1;
+  }
+  return a.id > b.id;
 }

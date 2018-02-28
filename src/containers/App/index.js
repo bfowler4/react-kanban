@@ -51,8 +51,7 @@ class App extends Component {
           />
         </div>
         {this.props.displayAddEditCardFlag ?
-          <AddEditCardForm /> : null
-        }
+          <AddEditCardForm /> : null}
       </div>
     );
   }

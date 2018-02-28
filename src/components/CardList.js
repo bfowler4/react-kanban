@@ -21,8 +21,10 @@ export default ({ cards, status, deleteCard, moveCard, setCardToEdit }) => {
   }
 
   function drop(event) {
-    let droppedCardId = event.dataTransfer.getData(`id`);
-    moveCard(droppedCardId, status);
+    if (event.dataTransfer.getData(`status`) !== status) {
+      let droppedCardId = event.dataTransfer.getData(`id`);
+      moveCard(droppedCardId, status);
+    }
   }
 
   return (
@@ -41,9 +43,7 @@ export default ({ cards, status, deleteCard, moveCard, setCardToEdit }) => {
               deleteCard={deleteCard}
               setCardToEdit={setCardToEdit}
             />
-          }) :
-          <h3>(No cards)</h3>
-        }
+          }) : <h3>(No cards)</h3>}
     </div>
   );
 }

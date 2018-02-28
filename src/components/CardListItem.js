@@ -11,6 +11,7 @@ export default ({ id, title, priority, status, created_by, assigned_to, deleteCa
 
   function dragStart(event) {
     event.dataTransfer.setData(`id`, id);
+    event.dataTransfer.setData(`status`, status);
   }
 
   return (
