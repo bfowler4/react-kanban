@@ -1,6 +1,7 @@
 const express = require(`express`);
 const router = express.Router();
 const kanbanRoute = require(`./kanban`);
+const usersRoute = require(`./users`);
 module.exports = router;
 
 router.use((req, res, next) => {
@@ -11,3 +12,4 @@ router.use((req, res, next) => {
 });
 
 router.use(`/kanban`, kanbanRoute);
+router.use(`/users`, usersRoute);
